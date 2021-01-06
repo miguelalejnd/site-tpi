@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %}{% endblock %}</title>
+	{% block css_link %}{% endblock css_link %}
+</head>
+<body>
+    {% block nav %}
+    <nav class="navbar">
+	    <ul>
+	        {% if user.is_authenticated %}
+	        <li class="list__item">
+	        {{user.get_username}}
+	        </li>
+	        <li class="list__item">
+	            <ul class="item__nested-list">
+	        		<li class="nested-list__item">
+	            		<a href="#" class="item__link">Lista favoritos</a>
+	        		</li>
+	        		<li class="nested-list__item">
+	            		<a href="#" class="item__link">Lista ver m&aacute;s tarde</a>
+	        		</li>
+	            </ul>
+	        </li>
+	        <li class="list__item">
+	            <a href="{% url 'logout' %}" class="item__link">Cerrar sesi&oacute;n</a>
+	        </li>
+	        {% else %}
+	        <li class="list__item">
+	            <a href="{% url 'login' %}" class="item__link">Iniciar sesi&oacute;n</a>
+	        </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endblock nav %}
+    
+	{% block content %}{% endblock content %}
+	
+	{% block pagination %}
+    {% if is_paginated %}
+      <div class="pagination">
+          <span class="page-links">
+              {% if page_obj.has_previous %}
+                  <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+              {% endif %}
+              <span class="page-current">
+                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </span>
+              {% if page_obj.has_next %}
+                  <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+              {% endif %}
+          </span>
+      </div>
+    {% endif %}
+    {% endblock %} 
+</body>
+</html>

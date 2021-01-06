@@ -1,0 +1,92 @@
+body {
+  background-color: white;
+  font-size: 1.2rem;
+}
+
+.cabecera {
+  text-align: center;
+  color: #006bb4;
+  font-family: Roboto, sans-serif;
+}
+
+.form {
+  margin: auto;
+  width: 25rem;
+  height: 15rem;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  font-family: arial;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-evenly;
+  align-items: center;
+  
+}
+
+.form__text {
+  display: block;
+  width: 90%;
+  padding: 0 0 0 10px;
+  height: 2.6rem;
+  border: 3px solid #d7d7d7;
+  border-radius: 10px;
+  font-family: Roboto, sans-serif;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.form__text:focus {
+    outline: 0;
+    border: 3px solid #006bb4;
+}
+
+.form__submit {
+  border: 3px solid #006bb4;
+  width: 90%;
+  height: 2.6rem;
+  background-color: #006bb4;
+  color: white;
+  border-radius: 10px;
+  font-family: Roboto, sans-serif;
+  font-size: 1rem;
+}
+
+.form__submit:focus {
+  outline: 0;
+  background-color: #01448a;
+}
+
+.form__submit:hover {
+  background-color: #01448a;
+  border: 3px solid #01448a;
+}
+
+.form__submit:active {
+  background-color: #006bb4;
+  border: 3px solid #006bb4;
+}
+
+.olvido-password {
+  text-align: center;
+  text-decoration: none;
+}
+
+.olvido-password:active {
+  color: #003375;
+}
+
+.olvido-password:visited {
+  color: #003375;
+}
+
+.p {
+  text-align: center;
+}
+
+.registrarse-link {
+  text-decoration: none;
+}
+
+.registrarse-link:visited {
+  color: #003375;
+}

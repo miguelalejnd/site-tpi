@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SoundApp | Iniciar sesi&oacute;n</title>
+    <link rel="stylesheet" href="{% static 'repository/css/style.css' %}">
+</head>
+<body>
+	<h1 class="cabecera">Iniciar sesi&oacute;n</h1>
+	{% if form.errors %}
+    <p>Tu usuario y contrase&ntide;a no coinciden. Intente de nuevo.</p>
+    {% endif %}
+	<form class="form">
+	    {{ form.username }}
+	    {{ form.username.errors }}
+	    {{ form.password }}
+	    {{ form.password.errors }}
+		<!--<input type="input" id="username" class="login-form__text"
+                     placeholder="Usuario">
+		<input type="password" id="password" class="login-form__text"
+                     placeholder="Contrase&ntilde;a">-->
+		<input type="submit" class="form__submit"
+                     value="Iniciar sesi&oacute;n">
+	</form>
+    <p class="p">
+        <a href="#" class="olvido-password">¿Olvidaste tu contrase&ntilde;a?</a>
+    </p>
+    <p class="p">¿No ten&eacute;s cuenta? 
+        <a href="#" class="registrarse-link">Registrate ahora.</a>
+    </p>
+</body>
+</html>

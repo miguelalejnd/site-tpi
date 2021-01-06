@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block title %}Repositorio | home{% endblock %}
+{% block css_link %}
+<link rel="stylesheet" href="{% static 'repository/css/style.css' %}">
+{% endblock css_link %}
+{% block content %}
+<h1>Recursos</h1>
+{% if recurso_lists %}
+<table>
+    {% for recurso in recurso_lists %}
+    <tr>
+        <td>{{ recurso.nombre }}</td>
+        <td>{{ recurso.descripcion }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No hay recursos disponibles.</p>
+{% endif %}
+{% endblock %}
