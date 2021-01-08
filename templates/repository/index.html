@@ -1,21 +1,28 @@
-{% extends "base_generic.html" %}
-{% load static %}
-
-{% block title %}Repositorio | home{% endblock %}
-{% block css_link %}
-<link rel="stylesheet" href="{% static 'repository/css/style.css' %}">
-{% endblock css_link %}
+{% extends "base.html" %}
+{% block title %}App | home{% endblock %}
 {% block content %}
 <h1>Recursos</h1>
 {% if recurso_lists %}
-<table>
+<ul>
     {% for recurso in recurso_lists %}
-    <tr>
-        <td>{{ recurso.nombre }}</td>
-        <td>{{ recurso.descripcion }}</td>
-    </tr>
+    <li>
+        {{ recurso.nombre }} --
+        {{ recurso.descripcion }}
+        {{ recurso.categoria.categoria }}
+        
+        {% if recurso.get_real_type == "RecursoImagen" %}
+            <img src="{{ recurso.recursoimagen.url }}" alt="miniatura">
+        {% elif recurso.get_real_type == 'RecursoSonido' %}
+             <audio controls>
+                 <source src="{{ recurso.recursosonido.archivo.url }}" type="audio/ogg">
+                 Your browser does not support the audio element.
+             </audio> 
+        {% elif recurso.get_real_type == 'RecursoEnlazado' %}
+            <a href="{{ recurso.recursoenlazado.url }}">{{ recurso.recursoenlazado.url }}</a>
+        {% endif %}
+    </li>
     {% endfor %}
-</table>
+</ul>
 {% else %}
 <p>No hay recursos disponibles.</p>
 {% endif %}

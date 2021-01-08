@@ -4,3 +4,4 @@ from .models import Recurso
 # Register your models here.
 
 admin.site.register(Recurso)
+

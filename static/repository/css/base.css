@@ -1,0 +1,102 @@
+body {
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr auto;
+    font-family: 'Roboto', sans-serif;
+}
+
+.header {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    padding: 4px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.main {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    background-color: #e6e6e6;
+}
+
+.footer {
+    grid-row-start: 3;
+    grid-row-end: 4;
+    padding: 1rem;
+    background-color: #292c2f;
+    color: white;
+}
+
+/*
+* Navbar rules.
+*/
+
+.nav__menu {
+    list-style-type: none;
+    display: flex;
+    background-color: white;
+    
+    /* La lista tiene un margin y padding por defecto. */
+    margin: 0;
+    padding: 0;
+}
+
+.menu__item {
+    text-align: center;
+}
+
+.item__link {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.item__link:hover {
+    color: #2196f3;
+}
+
+.item__link:active {
+    color: black;
+}
+
+.header__img {
+    margin-left: 3em; 
+}
+
+.summary {
+    list-style: none;
+    padding: 15px 20px;
+}
+
+.summary:hover {
+    color: #2196f3;
+}
+
+.menu__item:nth-child(2) {
+        position: relative;
+}
+
+.dropdown {
+    position: absolute;
+    min-inline-size: max-content;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #e6e6e6;
+}
+
+details[open] summary::before {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: "";
+}

@@ -21,7 +21,14 @@ class Recurso(models.Model):
     
     def __str__(self):
         return self.nombre
-
+    
+    def get_real_type(self):
+        if hasattr(self, 'recursoimagen'):
+            return self.recursoimagen.__class__.__name__
+        if hasattr(self, 'recursosonido'):
+            return self.recursosonido.__class__.__name__
+        if hasattr(self, 'recursoenlazado'):
+            return self.recursoenlazado.__class__.__name__
 
 class RecursoImagen(Recurso):
     archivo = models.ImageField(upload_to='images')

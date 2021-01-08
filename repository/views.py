@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login, views 
 from django.views import generic
-from django.contrib.auth import views 
 
-from repository.forms import CustomAuthenticationForm
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, CustomAuthenticationForm
 from .models import Recurso
 # Create your views here.
 
@@ -16,11 +14,12 @@ class IndexView(generic.ListView):
     context_object_name = 'recurso_lists'
     paginate_by = 10
     
-    #def get_queryset(self):
-        #return Recurso.objects.filter(propietario=self.request.user)
+    def get_queryset(self):
+        return Recurso.objects.filter(propietario=self.request.user)
 
 class CustomLoginView(views.LoginView):
-    authentication_form=CustomAuthenticationForm
+    authentication_form=CustomAuthenticationForm    
+
 
 def registro(request):
     if request.method == 'POST':
