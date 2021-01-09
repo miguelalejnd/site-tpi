@@ -57,3 +57,9 @@ def registro(request):
         template_name='registration/registro.html',
         context={'form': form})
         
+def new_resource(request):
+#    if request.method == 'POST':
+#        pass
+#    else:
+    pass
+#    return render()
