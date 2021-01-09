@@ -2,17 +2,21 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, views 
 from django.views import generic
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import UserRegistrationForm, CustomAuthenticationForm
-from .models import Recurso
+from .forms import UserRegistrationForm, CustomAuthenticationForm, RecursoImagenCreateForm
+from .models import Recurso, RecursoImagen
+
 # Create your views here.
 
 
-class IndexView(generic.ListView):
+class IndexView(LoginRequiredMixin, generic.ListView):
     model = Recurso
     template_name = 'repository/index.html'
     context_object_name = 'recurso_lists'
     paginate_by = 10
+    login_url = '/login/'
     
     def get_queryset(self):
         return Recurso.objects.filter(propietario=self.request.user)
@@ -20,7 +24,7 @@ class IndexView(generic.ListView):
 class CustomLoginView(views.LoginView):
     authentication_form=CustomAuthenticationForm    
 
-
+@login_required
 def registro(request):
     if request.method == 'POST':
         form = UserRegistrationForm(generic.ListView)
@@ -57,9 +61,13 @@ def registro(request):
         template_name='registration/registro.html',
         context={'form': form})
         
-def new_resource(request):
-#    if request.method == 'POST':
-#        pass
-#    else:
-    pass
-#    return render()
+class RecursoImagenCreateView(LoginRequiredMixin, generic.edit.CreateView):
+    model = RecursoImagen
+    form_class = RecursoImagenCreateForm
+    success_url = '/'
+    login_url = '/login/'
+    
+    def form_valid(self, form):
+        form.instance.propietario = self.request.user
+        
+        return super().form_valid(form)
