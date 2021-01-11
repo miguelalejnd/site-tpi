@@ -5,8 +5,12 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import UserRegistrationForm, CustomAuthenticationForm, RecursoImagenCreateForm
-from .models import Recurso, RecursoImagen
+from .forms import (
+    UserRegistrationForm, CustomAuthenticationForm,
+    RecursoImagenCreateForm, RecursoSonidoCreateForm,
+    RecursoLinkCreateForm
+)
+from .models import Recurso, RecursoImagen, RecursoSonido, RecursoEnlazado
 
 # Create your views here.
 
@@ -66,8 +70,83 @@ class RecursoImagenCreateView(LoginRequiredMixin, generic.edit.CreateView):
     form_class = RecursoImagenCreateForm
     success_url = '/'
     login_url = '/login/'
+    template_name = 'repository/recurso_form.html'
     
     def form_valid(self, form):
         form.instance.propietario = self.request.user
         
         return super().form_valid(form)
+
+class RecursoImagenUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
+    model = RecursoImagen
+    form_class = RecursoImagenCreateForm
+    success_url = '/'
+    login_url = '/login/'
+    template_name = 'repository/recurso_form.html'
+    
+    #def get_context_data(self, **kwargs):
+   #      context = super().get_context_data(**kwargs)
+     #    context['update'] = True
+        
+      #   return context
+
+
+class RecursoImagenDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
+    model = RecursoImagen
+    success_url = '/'
+    login_url = '/login/'
+    template_name = 'repository/recurso_confirm_delete.html'
+
+class RecursoSonidoCreateView(LoginRequiredMixin, generic.edit.CreateView):
+    model = RecursoSonido
+    form_class = RecursoSonidoCreateForm
+    success_url = '/'
+    login_url = '/login/'
+    template_name = 'repository/recurso_form.html'
+    
+    def form_valid(self, form):
+        form.instance.propietario = self.request.user
+        
+        return super().form_valid(form)
+
+
+class RecursoSonidoUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
+    model = RecursoSonido
+    form_class = RecursoSonidoCreateForm
+    success_url = '/'
+    login_url = '/login/'
+    template_name = 'repository/recurso_form.html'
+
+
+class RecursoSonidoDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
+    model = RecursoSonido
+    success_url = '/'
+    login_url = '/login/'
+    template_name = 'repository/recurso_confirm_delete.html'
+
+
+class RecursoLinkCreateView(LoginRequiredMixin, generic.edit.CreateView):
+    model = RecursoEnlazado
+    form_class = RecursoLinkCreateForm
+    success_url = '/'
+    login_url = '/login/'
+    template_name = 'repository/recurso_form.html'
+    
+    def form_valid(self, form):
+        form.instance.propietario = self.request.user
+        
+        return super().form_valid(form)
+
+class RecursoLinkUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
+    model = RecursoEnlazado
+    form_class = RecursoLinkCreateForm
+    success_url = '/'
+    login_url = '/login/'
+    template_name = 'repository/recurso_form.html'
+
+
+class RecursoLinkDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
+    model = RecursoEnlazado
+    success_url = '/'
+    login_url = '/login/'
+    template_name = 'repository/recurso_confirm_delete.html'

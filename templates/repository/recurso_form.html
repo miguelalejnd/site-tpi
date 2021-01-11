@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}App | Nueva imagen{% endblock %}
 {% block content %}
-    <h1 class="h1">Subir un recurso de imagen</h1>
+    <h1 class="h1">Subir un nuevo recurso</h1>
     <a href="{% url 'repository:index' %}" class="back">Regresar</a>
     {% if form.errors %}
     {{ form.errors }}
@@ -13,4 +13,7 @@
         {% endfor %}
         <input type="submit" value="Guardar" class="form__sumbit">
     </form>
+    {% if object %}
+     <a href="{% url 'repository:delete-img-resource'  pk=object.pk %}" class="delete">Eliminar</a>
+    {% endif %}
 {% endblock %}

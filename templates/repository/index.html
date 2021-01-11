@@ -2,9 +2,9 @@
 {% block title %}App | home{% endblock %}
 {% block content %}
 <h1>Recursos</h1>
-<a href="{% url 'repository:new-img-resource'%}">Subir imagen</a>
-<a href="#">Subir audio</a>
-<a href="#">Agregar nuevo archivo enlazado</a>
+<a href="{% url 'repository:new-img-resource' %}">Subir imagen</a>
+<a href="{% url 'repository:new-audio-resource' %}">Subir audio</a>
+<a href="{% url 'repository:new-link-resource' %}">Agregar nuevo archivo enlazado</a>
 {% if recurso_lists %}
 <ul>
     {% for recurso in recurso_lists %}
@@ -15,13 +15,19 @@
         
         {% if recurso.get_real_type == 'RecursoImagen' %}
             <img class="thumbnail" src="{{ recurso.recursoimagen.archivo.url }}" alt="miniatura">
+            <a href="{% url 'repository:edit-img-resource' pk=recurso.pk %}" class="edit">Editar</a>
+            <a href="{% url 'repository:delete-img-resource'  pk=recurso.pk %}" class="delete">Eliminar</a>
         {% elif recurso.get_real_type == 'RecursoSonido' %}
              <audio controls>
                  <source src="{{ recurso.recursosonido.archivo.url }}" type="audio/ogg">
                  Your browser does not support the audio element.
-             </audio> 
+             </audio>
+            <a href="{% url 'repository:edit-audio-resource' pk=recurso.pk %}" class="edit">Editar</a>
+            <a href="{% url 'repository:delete-audio-resource'  pk=recurso.pk %}" class="delete">Eliminar</a>
         {% elif recurso.get_real_type == 'RecursoEnlazado' %}
             <a href="{{ recurso.recursoenlazado.url }}">{{ recurso.recursoenlazado.url  }}</a>
+            <a href="{% url 'repository:edit-link-resource' pk=recurso.pk %}" class="edit">Editar</a>
+            <a href="{% url 'repository:delete-link-resource'  pk=recurso.pk %}" class="delete">Eliminar</a>
         {% endif %}
     </li>
     {% endfor %}

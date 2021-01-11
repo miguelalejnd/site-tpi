@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm,  AuthenticationForm
 from django.contrib.auth.models import User
 from django import forms
 
-from .models import RecursoImagen
+from .models import RecursoImagen, RecursoSonido, RecursoEnlazado
 
 class UserRegistrationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
@@ -63,3 +63,37 @@ class RecursoImagenCreateForm(forms.ModelForm):
     class Meta:
         model = RecursoImagen
         fields = ['nombre', 'descripcion', 'categoria', 'archivo']
+
+class RecursoSonidoCreateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(RecursoSonidoCreateForm, self).__init__(*args, **kwargs)
+        
+        # Agrega un atributo class con el mismo valor
+        # a todos los campos del formulario.
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+        
+        self.fields['nombre'].widget.attrs['placeholder'] = 'Nombre'
+        self.fields['descripcion'].widget.attrs['placeholder'] = 'Descripción'
+
+    class Meta:
+        model = RecursoSonido
+        fields = ['nombre', 'descripcion', 'categoria', 'archivo']
+
+
+class RecursoLinkCreateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(RecursoLinkCreateForm, self).__init__(*args, **kwargs)
+        
+        # Agrega un atributo class con el mismo valor
+        # a todos los campos del formulario.
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+        
+        self.fields['nombre'].widget.attrs['placeholder'] = 'Nombre'
+        self.fields['descripcion'].widget.attrs['placeholder'] = 'Descripción'
+        self.fields['url'].widget.attrs['placeholder'] = 'URL'
+
+    class Meta:
+        model = RecursoEnlazado
+        fields = ['nombre', 'descripcion', 'categoria', 'url']

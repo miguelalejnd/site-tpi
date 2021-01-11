@@ -1,43 +1,36 @@
 body {
     background-color: white;
+    font-size: 16px;
 }
+
 .h1 {
     text-align: center;
     color: #006bb4;
-    font-family: arial;
-}
-
-.back {
-  text-align: center;
-  color: #006bb4;
-  font-family: arial;
-  text-decoration: none;
-}
-
-.back:active {
-  color: #003375;
+    font-family: Roboto, sans-serif;
 }
 
 .form {
     width: 25em;
-    height: 27em;
-    padding: 2em;
+    height: 30em;
     margin: auto;
-    display: flex;
-    flex-flow: column nowrap;
     border-radius: 10px;
     background-color: #f2f2f2;
-    font-family: arial;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .form__text {
-    height: 1cm;
-    padding: 0 5px;
-    margin: 1px 0 10px;
+    display: block;
+    width: 90%;
+    height: 2.6em;
+    padding: 0 0 0 0.6em;
     border: 3px solid #d7d7d7;
-    border-radius: 10px;
-    box-sizing: border-box;
+    border-radius: 0.6em;
     font-family: arial;
+    font-size: 1.1em;
+    box-sizing: border-box;
 }
 
 .form__text:focus {
@@ -45,19 +38,18 @@ body {
     border: 3px solid #006bb4;
 }
 
-.form__submit {
+.form__sumbit {
     border: 3px solid #006bb4;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 1cm;
+    width: 90%;
+    height: 2.6em;
     background-color: #006bb4;
     color: white;
-    border-radius: 10px;
+    border-radius: 0.6em;
     font-family: arial;
+    font-size: 1.1em;
 }
 
-.form__submit:focus {
+.form__sumbit:focus {
     outline: 0;
     background-color: #01448a;
 }
