@@ -13,9 +13,11 @@
         <nav class="nav">
             <ul class="nav__menu">
                 <li class="menu__item">
-                    <a class="item__link" href="#">Inicio</a>
+                    <a class="item__link" href="{% url 'repository:index' %}">Inicio</a>
                 </li>
-
+                <li class="menu__item">
+                    <a class="item__link" href="{% url 'repository:my-resources' %}">Mis recursos</a>
+                </li>
                 <li class="menu__item">
                     <details class="details">
                         <summary class="summary">Listas &#8226;</summary>

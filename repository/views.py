@@ -21,12 +21,31 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'recurso_lists'
     paginate_by = 10
     login_url = '/login/'
-    
+
+class MyResourcesView(LoginRequiredMixin, generic.ListView):
+    login_url = '/login/'
+    model = Recurso
+    template_name = 'repository/myresources.html'
+    context_object_name = 'recurso_lists'
+    paginate_by = 10
+
     def get_queryset(self):
         return Recurso.objects.filter(propietario=self.request.user)
 
+class RecursoImagenDetailView(generic.detail.DetailView):
+    model = RecursoImagen
+
+
+class RecursoSonidoDetailView(generic.detail.DetailView):
+    model = RecursoSonido
+
+
+class RecursoEnlazadoDetailView(generic.detail.DetailView):
+    model = RecursoEnlazado
+
 class CustomLoginView(views.LoginView):
     authentication_form=CustomAuthenticationForm    
+
 
 @login_required
 def registro(request):

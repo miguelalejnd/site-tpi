@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}App | Nueva imagen{% endblock %}
+{% block content %}
+    <h1 class="h1">{{ object.nombre | title }}</h1>
+    <a href="{% url 'repository:index' %}" class="back">Regresar</a>
+    <p>
+        Nombre: {{ object.nombre }}.
+    </p>
+    <p>
+        Descripci&oacute;n: {{ object.descripcion }}.
+    </p>
+    <p>
+        Usuario propietario: {{ object.propietario }}.
+    </p>
+    <p>
+        Categor&iacute;a: {{ object.categoria }}.
+    </p>
+    <p>
+        <img class="thumbnail" src="{{ object.archivo.url }}" alt="miniatura">
+    </p>
+    <a href="#"> Descargar</a>
+{% endblock %}
