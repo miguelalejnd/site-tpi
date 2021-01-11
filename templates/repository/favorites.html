@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}App | home{% endblock %}
+{% block content %}
+<h1>Favoritos</h1>
+
+{% if recurso_lists %}
+<ul>
+    {% for recurso in recurso_lists %}
+    <li>
+        {{ recurso.nombre }} --
+        {{ recurso.descripcion }} --
+        {{ recurso.categoria }} --
+        
+        {% if recurso.get_real_type == 'RecursoImagen' %}
+            <img class="thumbnail" src="{{ recurso.recursoimagen.archivo.url }}" alt="miniatura">
+            <a href="{% url 'repository:detail-recurso-img' pk=recurso.pk %}" class="edit">Ver</a>
+            <a href="#"> Descargar</a>
+        {% elif recurso.get_real_type == 'RecursoSonido' %}
+             <audio controls>
+                 <source src="{{ recurso.recursosonido.archivo.url }}" type="audio/ogg">
+                 Your browser does not support the audio element.
+             </audio>
+            <a href="{% url 'repository:detail-recurso-audio' pk=recurso.pk %}" class="edit">Ver</a>
+            <a href="#"> Descargar</a>
+        {% elif recurso.get_real_type == 'RecursoEnlazado' %}
+            <a href="{{ recurso.recursoenlazado.url }}">{{ recurso.recursoenlazado.url  }}</a>
+            <a href="{% url 'repository:detail-recurso-link' pk=recurso.pk %}" class="edit">Ver</a>
+            <a href="#"> Descargar</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay recursos en la lista de favoritos.</p>
+{% endif %}
+{% endblock %}

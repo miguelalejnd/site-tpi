@@ -10,7 +10,7 @@ from .forms import (
     RecursoImagenCreateForm, RecursoSonidoCreateForm,
     RecursoLinkCreateForm
 )
-from .models import Recurso, RecursoImagen, RecursoSonido, RecursoEnlazado
+from .models import Recurso, RecursoImagen, RecursoSonido, RecursoEnlazado, Lista
 
 # Create your views here.
 
@@ -22,6 +22,29 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
     login_url = '/login/'
 
+
+class FavoritesListView(LoginRequiredMixin, generic.ListView):
+    model = Recurso
+    template_name = 'repository/favorites.html'
+    context_object_name = 'recurso_lists'
+    paginate_by = 10
+    login_url = '/login/'
+    
+    def get_queryset(self):
+        return Recurso.objects.filter(lista__propietario=self.request.user, lista__tipo_lista = Lista.TIPO_FAVORITOS)
+
+
+class SeeAfterListView(LoginRequiredMixin, generic.ListView):
+    model = Recurso
+    template_name = 'repository/see_after.html'
+    context_object_name = 'recurso_lists'
+    paginate_by = 10
+    login_url = '/login/'
+
+    def get_queryset(self):
+        return Recurso.objects.filter(lista__propietario=self.request.user, lista__tipo_lista = Lista.TIPO_VER_MAS_TARDE)
+
+
 class MyResourcesView(LoginRequiredMixin, generic.ListView):
     login_url = '/login/'
     model = Recurso
@@ -31,6 +54,7 @@ class MyResourcesView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return Recurso.objects.filter(propietario=self.request.user)
+
 
 class RecursoImagenDetailView(generic.detail.DetailView):
     model = RecursoImagen
@@ -42,6 +66,7 @@ class RecursoSonidoDetailView(generic.detail.DetailView):
 
 class RecursoEnlazadoDetailView(generic.detail.DetailView):
     model = RecursoEnlazado
+
 
 class CustomLoginView(views.LoginView):
     authentication_form=CustomAuthenticationForm    

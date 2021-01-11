@@ -6,11 +6,13 @@ app_name = 'repository'
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name = 'index'),
-    path('new-img-resource/', views.RecursoImagenCreateView.as_view(), name='new-img-resource'),
-    path('my-resources/', views.MyResourcesView.as_view(), name='my-resources'),
+    path('favorites',views.FavoritesListView.as_view(), name='favorites'),
+    path('see-after',views.SeeAfterListView.as_view(), name='see-after'),
     path('<int:pk>/detail-recurso-img/', views.RecursoImagenDetailView.as_view(), name='detail-recurso-img'),
     path('<int:pk>/detail-recurso-audio/', views.RecursoSonidoDetailView.as_view(), name='detail-recurso-audio'),
     path('<int:pk>/detail-recurso-link/', views.RecursoEnlazadoDetailView.as_view(), name='detail-recurso-link'),
+    path('my-resources/', views.MyResourcesView.as_view(), name='my-resources'),
+    path('new-img-resource/', views.RecursoImagenCreateView.as_view(), name='new-img-resource'),
     path('<int:pk>/edit-img-resource/', views.RecursoImagenUpdateView.as_view(), name='edit-img-resource'),
     path('<int:pk>/delete-img-resource/', views.RecursoImagenDeleteView.as_view(), name='delete-img-resource'),
     path('new-audio-resource/', views.RecursoSonidoCreateView.as_view(), name='new-audio-resource'),
