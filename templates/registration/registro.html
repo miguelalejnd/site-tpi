@@ -1,18 +1,21 @@
-{% extends 'base_generic.html' %}
+{% extends 'base.html' %}
 {% load static %}
-{% block title %}Crear una cuenta{% endblock %}
+{% block title %}App | Crear una cuenta{% endblock %}
 {% block css_link %}
+<link rel="stylesheet" href="{% static 'repository/css/normalize.css' %}">
 <link rel="stylesheet" href="{% static 'repository/css/registro.css' %}">
 {% endblock css_link %}
+{% block header %}{% endblock header %}
 {% block content %}
     <h1 class="h1">Registrarse</h1>
-    <a  href="{% url 'login' %}" class="back">Regresar</a>
     <form action="{% url 'registro' %}" method="post" class="form">
         {% csrf_token %}
         {% for field in form %}
-        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
         {{field}}
         {% endfor %}
         <input type="submit" value="Crear mi cuenta" class="form__submit">
     </form>
+    <p class="p">¿Ya ten&eacute;s cuenta?
+        <a href="{% url 'login' %}" class="login">Inici&aacute; sesi&oacute;n.</a>
+    </p>
 {% endblock content %}

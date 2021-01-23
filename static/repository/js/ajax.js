@@ -1,22 +1,6 @@
 body {
   background-color: white;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
 }
-
-.main {
-  flex-grow: 1;
-}
-
-.footer {
-  padding: 1em;
-  background-color: #292c2f;
-  color: white;
-  flex-grow: 1;
-  text-align: center;
-}
-
 
 .cabecera {
   text-align: center;
@@ -24,10 +8,11 @@ body {
   font-family: Roboto, sans-serif;
 }
 
-.form {
+.login-form {
   margin: auto;
   height: 15em;
   border-radius:  .6em;
+  background-color: #f2f2f2;
   font-family: arial;
   display: flex;
   flex-direction:column;
@@ -36,7 +21,7 @@ body {
   
 }
 
-.form__text {
+.login-form__text {
   display: block;
   width: 90%;
   padding: 0 0 0 .6em;
@@ -44,33 +29,32 @@ body {
   border: .2em solid #d7d7d7;
   border-radius: .6em;
   font-family: Roboto, sans-serif;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   box-sizing: border-box;
 }
 
-.form__text:focus {
+.login-form__text:focus {
     outline: 0;
     border: .2em solid #006bb4;
 }
 
-.form__submit {
+.login-form__submit {
   border: .2em solid #006bb4;
   width: 90%;
-  height: 2.6em;
+  height: 2.6rem;
   background-color: #006bb4;
   color: white;
   border-radius: .6em;
   font-family: Roboto, sans-serif;
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
-.form__submit:focus {
+.login-form__submit:focus {
     outline: 0;
 }
 
-.form__submit:active {
+.login-form__submit:active {
   background-color: #01448a;
   border: .2em solid #01448a;
-  padding: 0;
 }
 
 .olvido-password {
@@ -89,6 +73,7 @@ body {
 .p {
   text-align: center;
   font-family: Roboto, sans-serif;
+  color: #003375;
   font-size: 1.2em;
 }
 
@@ -96,53 +81,4 @@ body {
   text-decoration: none;
 }
 
-.registrarse-link:visited {
-  color: #003375;
-}
-
-@media only screen and (min-width: 600px) {
-  body {
-    background-color: white;
-  }
-  
-  .cabecera {
-    font-size: 2.1em;
-  }
-  
-  .form{
-      width: 25em;
-  }
-}
-
-@media only screen and (min-width: 992px) {
-  .cabecera {
-    font-size: 2.4em;
-  }
-  
-  .main {
-    flex-grow: 1;
-  }
-
-  .footer {
-    flex-grow: 0;
-  }
-  
-  .form {
-    background-color: #f2f2f2;
-  }
-  
-  .form__submit:hover {
-    background-color: #01448a;
-    border: .2em solid #01448a;
-  }
-  
-  .form__submit:focus {
-    outline: 0;
-    background-color: #01448a;
-  }
-
-  .form__submit:active {
-    background-color: #006bb4;
-    border: .2em solid #006bb4;
-  }
-} 
+.registrarse-link

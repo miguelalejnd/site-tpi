@@ -12,6 +12,13 @@ class UserRegistrationForm(UserCreationForm):
         # a todos los campos del formulario.
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form__text'
+        
+        self.fields['username'].widget.attrs['placeholder'] = 'Nombre de usuario'
+        self.fields['password1'].widget.attrs['placeholder'] = 'Contraseña'
+        self.fields['password2'].widget.attrs['placeholder'] = 'Contraseña (confirmación)'
+        self.fields['first_name'].widget.attrs['placeholder'] = 'Un nombre'
+        self.fields['last_name'].widget.attrs['placeholder'] = 'Un apellido'
+        self.fields['email'].widget.attrs['placeholder'] = 'Dirección de correo electrónico'
             
     first_name = forms.CharField(
         max_length=150,

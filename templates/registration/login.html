@@ -1,25 +1,21 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>SoundApp | Iniciar sesi&oacute;n</title>
-    <link rel="stylesheet" href="{% static 'repository/css/login.css' %}">
-</head>
-<body>
+{% block css_link %}
+<link rel="stylesheet" href="{% static 'repository/css/normalize.css' %}">
+<link rel="stylesheet" href="{% static 'repository/css/login.css' %}">
+{% endblock css_link %}
+{% block title %}SoundApp | Iniciar sesi&oacute;n{% endblock %}
+{% block header %}{% endblock header %}
+{% block content %}
+    {% if next %} <p>Primero inicia sesi&oacute;n</p>{% endif %}
 	<h1 class="cabecera">Iniciar sesi&oacute;n</h1>
 	{% if form.errors %}
-    <p class="error">Tu usuario o contrase&ntilde;a no coinciden.</p>
+    <p class="error">{{ form.errors }}</p>
     {% endif %}
 	<form class="form" method="post">
 	    {% csrf_token %}
 	    {{ form.username }}
-	    {{ form.username.errors }}
 	    {{ form.password }}
-	    {{ form.password.errors }}
-		<!--<input type="input" id="username" class="login-form__text"
-                     placeholder="Usuario">
-		<input type="password" id="password" class="login-form__text"
-                     placeholder="Contrase&ntilde;a">-->
 		<input type="submit" class="form__submit"
                      value="Iniciar sesi&oacute;n">
 	</form>
@@ -27,7 +23,6 @@
         <a href="#" class="olvido-password">¿Olvidaste tu contrase&ntilde;a?</a>
     </p>
     <p class="p">¿No ten&eacute;s cuenta? 
-        <a href="#" class="registrarse-link">Crear una cuenta de usuario.</a>
+        <a href="{% url 'registro' %}" class="registrarse-link">Registrate ahora.</a>
     </p>
-</body>
-</html>
+{% endblock content %}

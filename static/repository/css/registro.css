@@ -1,6 +1,5 @@
 body {
     background-color: white;
-    font-size: 16px;
 }
 
 .h1 {
@@ -10,11 +9,9 @@ body {
 }
 
 .form {
-    width: 25em;
     height: 30em;
     margin: auto;
-    border-radius: 10px;
-    background-color: #f2f2f2;
+    border-radius: .6em;
     display: flex;
     flex-direction:column;
     justify-content: space-evenly;
@@ -22,44 +19,92 @@ body {
 }
 
 .form__text {
-    display: block;
     width: 90%;
     height: 2.6em;
     padding: 0 0 0 0.6em;
-    border: 3px solid #d7d7d7;
-    border-radius: 0.6em;
+    border: .2em solid #d7d7d7;
+    border-radius: .6em;
     font-family: arial;
-    font-size: 1.1em;
+    font-size: 1.2em;
     box-sizing: border-box;
 }
 
 .form__text:focus {
     outline: 0;
-    border: 3px solid #006bb4;
+    border: .2em solid #006bb4;
 }
 
-.form__sumbit {
-    border: 3px solid #006bb4;
+.form__submit {
+    border: .2em solid #006bb4;
     width: 90%;
     height: 2.6em;
     background-color: #006bb4;
     color: white;
-    border-radius: 0.6em;
+    border-radius: .6em;
     font-family: arial;
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
 
-.form__sumbit:focus {
+.form__submit:focus {
+    outline: 0;
+}
+
+.form__submit:active {
+    background-color: #01448a;
+    border: .2em solid #01448a;
+    padding: 0;
+}
+
+.p {
+  text-align: center;
+  font-family: Roboto, sans-serif;
+  font-size: 1.2em;
+}
+
+.login {
+  color: #006bb4;
+  text-decoration: none;
+}
+
+.login:visited {
+  color: #006bb4;
+}
+
+@media only screen and (min-width: 600px) {
+  body {
+    background-color: white;
+  }
+  
+  .h1 {
+    font-size: 2.1em;
+  }
+  
+  .form{
+      width: 25em;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .h1 {
+    font-size: 2.4em;
+  }
+  
+  .form {
+    background-color: #f2f2f2;
+  }
+  
+  .form__submit:hover {
+    background-color: #01448a;
+    border: .2em solid #01448a;
+  }
+  
+  .form__submit:focus {
     outline: 0;
     background-color: #01448a;
-}
+  }
 
-.form__sumbit:hover {
-    background-color: #01448a;
-    border: 3px solid #01448a;
-}
-
-.form__sumbit:active {
+  .form__submit:active {
     background-color: #006bb4;
-    border: 3px solid #006bb4;
-}
+    border: .2em solid #006bb4;
+  }
+} 

@@ -1,5 +1,13 @@
 {% extends "base.html" %}
-{% block title %}App | home{% endblock %}
+{% load static %}
+
+{% block css_link%}
+<link rel="stylesheet" href="{% static 'repository/css/normalize.css' %}">
+<link rel="stylesheet" href="{% static 'repository/css/base.css' %}">
+{% endblock css_link %}
+
+{% block title %}App | Favoritos{% endblock %}
+
 {% block content %}
 <h1>Favoritos</h1>
 

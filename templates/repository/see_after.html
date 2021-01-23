@@ -1,5 +1,12 @@
 {% extends "base.html" %}
-{% block title %}App | home{% endblock %}
+{% load static %}
+
+{% block css_link%}
+<link rel="stylesheet" href="{% static 'repository/css/normalize.css' %}">
+<link rel="stylesheet" href="{% static 'repository/css/base.css' %}">
+{% endblock css_link %}
+
+{% block title %}App | Ver mas tarde{% endblock %}
 {% block content %}
 <h1>Ver m&aacute;s tarde</h1>
 
@@ -27,6 +34,7 @@
             <a href="{% url 'repository:detail-recurso-link' pk=recurso.pk %}" class="edit">Ver</a>
             <a href="#"> Descargar</a>
         {% endif %}
+        <a href="#" >Eliminar de la lista</a>
     </li>
     {% endfor %}
 </ul>

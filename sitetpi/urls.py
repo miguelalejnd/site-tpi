@@ -26,11 +26,7 @@ urlpatterns = [
     path('', include('repository.urls')),
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    #path(
-       # 'accounts/register',
-        #views.UserRegisterView.as_view(),
-        #name='registro'
-   # )
+    path('register/', views.registro, name='registro'),
 ]
 
 if settings.DEBUG:

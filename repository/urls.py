@@ -1,8 +1,13 @@
-from django.urls import path
+from django.urls import path, include
 
 from . import views
 
 app_name = 'repository'
+
+async_patterns = [
+    path('<int:pk>/async-fav/', views.async_fav, name='async-fav'),
+    path('<int:pk>/async_vms/', views.async_vms, name='async-vms')
+]
 
 urlpatterns = [
     path('', views.IndexView.as_view(), name = 'index'),
@@ -21,5 +26,6 @@ urlpatterns = [
     path('new-link-resource/', views.RecursoLinkCreateView.as_view(), name='new-link-resource'),
     path('<int:pk>/edit-link-resource/', views.RecursoLinkUpdateView.as_view(), name='edit-link-resource'),
     path('<int:pk>/delete-link-resource/', views.RecursoLinkDeleteView.as_view(), name='delete-link-resource'),
+    path('xhr/', include(async_patterns)),
 ]
 

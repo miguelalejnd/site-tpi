@@ -1,0 +1,11 @@
+.list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.list__item {
+    margin: 1em;
+    border: 1px solid black;
+    min-width: 400px;
+    flex: 1 1 400px;
+}

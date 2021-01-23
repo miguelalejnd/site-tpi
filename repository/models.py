@@ -57,7 +57,7 @@ class Lista(models.Model):
     )
     
     def __str__(self):
-        if es_favorito == True:
+        if self.tipo_lista == self.TIPO_FAVORITOS:
             return "Lista de favoritos"
         else:
             return "Lista de ver mas tarde"

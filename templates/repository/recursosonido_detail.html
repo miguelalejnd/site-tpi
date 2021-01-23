@@ -1,8 +1,35 @@
 {% extends "base.html" %}
-{% block title %}App | Nueva imagen{% endblock %}
+
+{% load static %}
+
+{% block css_link%}
+<link rel="stylesheet" href="{% static 'repository/css/normalize.css' %}">
+<link rel="stylesheet" href="{% static 'repository/css/base.css' %}">
+{% endblock css_link %}
+
+{% block title %}App | Nuevo audio{% endblock %}
 {% block content %}
     <h1 class="h1">{{ object.nombre | title }}</h1>
     <a href="{% url 'repository:index' %}" class="back">Regresar</a>
+    
+    <form class="form" id="f1">{% csrf_token %}
+        <input type="hidden" id="urlId" value="http://127.0.0.1:8000/xhr/{{ object.pk }}/async-fav/">
+        {% if is_fav %}
+        <input type="submit" class="submit" id="submit-fav-id" value="Eliminar de Favoritos">
+        {% else %}
+        <input type="submit" class="submit" id="submit-fav-id" value="Agregar a Favoritos">
+        {% endif %}
+    </form>
+    
+    <form class="form" id="f2">{% csrf_token %}
+        <input type="hidden" id="urlId-vms" value="http://127.0.0.1:8000/xhr/{{ object.pk }}/async_vms/">
+        {% if is_vms %}
+        <input type="submit" class="submit" id="submit-vms-id" value="Agregar a Ver más tarde">
+        {% else %}
+        <input type="submit" class="submit" id="submit-vms-id" value="Eliminar de Ver más tarde">
+        {% endif %}
+    </form>
+    
     <p>
         Nombre: {{ object.nombre }}.
     </p>
@@ -10,7 +37,7 @@
         Descripci&oacute;n: {{ object.descripcion }}.
     </p>
     <p>
-        Usuario propietario: {{ object.propietario }}.
+        Propietario del archivo: {{ object.propietario }}.
     </p>
     <p>
         Categor&iacute;a: {{ object.categoria }}.
@@ -22,4 +49,5 @@
         </audio>
     </p>
     <a href="#"> Descargar</a>
+    <script src="{% static 'repository/js/script.js' %}"></script>
 {% endblock %}

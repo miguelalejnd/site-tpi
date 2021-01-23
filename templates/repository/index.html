@@ -1,14 +1,23 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block css_link%}
+<link rel="stylesheet" href="{% static 'repository/css/normalize.css' %}">
+<link rel="stylesheet" href="{% static 'repository/css/base.css' %}">
+<link rel="stylesheet" href="{% static 'repository/css/index.css' %}">
+{% endblock css_link %}
+
 {% block title %}App | home{% endblock %}
+
 {% block content %}
 <h1>Recursos</h1>
 <a href="{% url 'repository:new-img-resource' %}">Subir una imagen</a>
 <a href="{% url 'repository:new-audio-resource' %}">Subir un audio</a>
 <a href="{% url 'repository:new-link-resource' %}">Guardar un enlace</a>
 {% if recurso_lists %}
-<ul>
+<ul class="list">
     {% for recurso in recurso_lists %}
-    <li>
+    <li class="list__item">
         {{ recurso.nombre }} --
         {{ recurso.descripcion }} --
         {{ recurso.categoria }} --
@@ -33,6 +42,8 @@
     {% endfor %}
 </ul>
 {% else %}
-<p>No hay recursos disponibles.</p>
+<p class="p">No hay recursos disponibles.</p>
 {% endif %}
 {% endblock %}
+
+

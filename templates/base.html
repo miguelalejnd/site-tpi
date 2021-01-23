@@ -4,10 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'repository/css/base.css' %}">
+    {% block css_link %}
+    <!--<link rel="stylesheet" href="{% static 'repository/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'repository/css/base.css' %}">-->
+    {% endblock css_link %}
     <title>{% block title %}{% endblock title%}</title>
 </head>
 <body>
+    {% block header %}
     <header class="header">
         <img  class="header__img" src="logo.png" alt="Logo">
         <nav class="nav">
@@ -31,21 +35,13 @@
                         </ul>
                     </details>
                 </li>
-
-<!--
-                <li class="menu__item">
-                    <a class="item__link" href="#">Favoritos</a>
-                </li>
-                <li class="menu__item">
-                    <a class="item__link" href="#">Ver m&aacute;s tarde</a>
-                </li>
--->
                 <li class="menu__item">
                     <a class="item__link" href="{% url 'logout' %}">Cerrar sesi&oacute;n</a>
                 </li>
             </ul>
         </nav>
     </header>
+    {% endblock header %}
     <main class="main">{% block content %}{% endblock content %}</main>
     
     <footer class="footer">

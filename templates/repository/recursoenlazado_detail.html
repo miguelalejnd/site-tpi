@@ -1,5 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block css_link%}
+<link rel="stylesheet" href="{% static 'repository/css/normalize.css' %}">
+<link rel="stylesheet" href="{% static 'repository/css/base.css' %}">
+{% endblock css_link %}
+
 {% block title %}App | Nueva imagen{% endblock %}
+
 {% block content %}
     <h1 class="h1">{{ object.nombre | title }}</h1>
     <a href="{% url 'repository:index' %}" class="back">Regresar</a>

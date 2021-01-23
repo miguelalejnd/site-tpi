@@ -1,4 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block css_link%}
+<link rel="stylesheet" href="{% static 'repository/css/normalize.css' %}">
+<link rel="stylesheet" href="{% static 'repository/css/base.css' %}">
+{% endblock css_link %}
+
 {% block title %}App | Nueva imagen{% endblock %}
 {% block content %}
     <h1 class="h1">{{ object.nombre | title }}</h1>
@@ -18,5 +25,11 @@
     <p>
         <img class="thumbnail" src="{{ object.archivo.url }}" alt="miniatura">
     </p>
-    <a href="#"> Descargar</a>
+
+    {% if is_fav %}
+    <p> es favorito</p>
+    {% endif %}
+    {% if is_vms %}
+    <p> es ver mas tarde</p>
+    {% endif %}
 {% endblock %}

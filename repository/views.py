@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import login, views 
-from django.views import generic
+from django.views import generic, View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import (
     UserRegistrationForm, CustomAuthenticationForm,
@@ -55,16 +57,98 @@ class MyResourcesView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return Recurso.objects.filter(propietario=self.request.user)
 
+class SuperView(generic.detail.DetailView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        '''
+        new_context_entry_1 = self.object.list_set.filter(
+            propietario=self.request.user,
+            tipo_lista=Lista.TIPO_FAVORITOS
+        ).exist()
+        
+        new_context_entry_2 = self.object.list_set.filter(
+            propietario=self.request.user,
+            tipo_lista=Lista.TIPO_VER_MAS_TARDE
+        ).exist()
+        
+        context["is_fav"] = new_context_entry_1
+        context["is_vms"] = new_context_entry_2
+        '''
+        try:
+            if self.object.lista_set.get(propietario=self.request.user, tipo_lista=Lista.TIPO_FAVORITOS):
+                new_context_entry_1 = True
+        except ObjectDoesNotExist:
+            new_context_entry_1 = False
+        
+        try:
+            if self.object.lista_set.get(propietario=self.request.user, tipo_lista=Lista.TIPO_VER_MAS_TARDE):
+                new_context_entry_2 = True
+        except ObjectDoesNotExist:
+            new_context_entry_2 = False
+        
+        context["is_fav"] = new_context_entry_1
+        context["is_vms"] = new_context_entry_2
+        
+        return context
 
-class RecursoImagenDetailView(generic.detail.DetailView):
+
+class RecursoImagenDetailView(SuperView):
     model = RecursoImagen
 
+#    def get_context_data(self, **kwargs):
+#        context = super().get_context_data(**kwargs)      
+#        try:                
+#            new_context_entry = True if self.object.get()
+#        except RecursoImagen.DoesNotExist :
+#            new_context_entry 
+#    context["is_list_item"] = new_context_entry
+#    return context
 
-class RecursoSonidoDetailView(generic.detail.DetailView):
+
+def async_fav(request, pk):
+    if request.user.is_authenticated:
+        recurso = get_object_or_404(Recurso, pk=pk)
+        
+        try:
+            list = recurso.lista_set.get(propietario=request.user, tipo_lista=Lista.TIPO_FAVORITOS)
+            list.delete()
+            value = 'Agregar Favoritos'
+        except Lista.DoesNotExist:
+            new_list = Lista(tipo_lista=Lista.TIPO_FAVORITOS, propietario=request.user)
+            new_list.save()
+            recurso.lista_set.add(new_list)
+            value = 'Eliminar de Favoritos'
+
+        response = HttpResponse(value)
+        response['Access-Control-Allow-Origin'] = '*'
+        
+        return response
+
+def async_vms(request, pk):
+    if request.user.is_authenticated:
+        recurso = get_object_or_404(Recurso, pk=pk)
+    
+    try:
+        list = recurso.lista_set.get(propietario=request.user, tipo_lista=Lista.TIPO_VER_MAS_TARDE )
+        list.delete()
+        value = 'Agregar a Ver más tarde'
+    except Lista.DoesNotExist:
+        new_list = Lista(tipo_lista=Lista.TIPO_VER_MAS_TARDE , propietario=request.user)
+        new_list.save()
+        recurso.lista_set.add(new_list)
+        value = 'Eliminar de Ver más tarde'
+
+    response = HttpResponse(value)
+    response['Access-Control-Allow-Origin'] = '*'
+    
+    return response
+    
+    
+class RecursoSonidoDetailView(SuperView):
     model = RecursoSonido
 
 
-class RecursoEnlazadoDetailView(generic.detail.DetailView):
+class RecursoEnlazadoDetailView(SuperView):
     model = RecursoEnlazado
 
 
@@ -72,7 +156,6 @@ class CustomLoginView(views.LoginView):
     authentication_form=CustomAuthenticationForm    
 
 
-@login_required
 def registro(request):
     if request.method == 'POST':
         form = UserRegistrationForm(generic.ListView)
@@ -128,11 +211,10 @@ class RecursoImagenUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
     login_url = '/login/'
     template_name = 'repository/recurso_form.html'
     
-    #def get_context_data(self, **kwargs):
-   #      context = super().get_context_data(**kwargs)
-     #    context['update'] = True
-        
-      #   return context
+    def dispatch(self, request, *args, **kwargs):
+        if self.object.propietario != self.request:
+            raise Http404('No tiene permiso para editar este elemento.')
+        return super(RecursoImagenUpdateView, self).dispatch(request, *args, **kwargs)
 
 
 class RecursoImagenDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
@@ -140,6 +222,11 @@ class RecursoImagenDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     success_url = '/'
     login_url = '/login/'
     template_name = 'repository/recurso_confirm_delete.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        if self.object.propietario != self.request.user:
+            raise Http404('No tiene permiso para eliminar este elemento.')
+        return super(RecursoImagenDeleteView, self).dispatch(request, *args, **kwargs)
 
 class RecursoSonidoCreateView(LoginRequiredMixin, generic.edit.CreateView):
     model = RecursoSonido
@@ -161,6 +248,10 @@ class RecursoSonidoUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
     login_url = '/login/'
     template_name = 'repository/recurso_form.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        if self.object.propietario != self.request.user:
+            raise Http404('No tiene permiso para editar este elemento.')
+        return super(RecursoSonidoUpdateView, self).dispatch(request, *args, **kwargs)
 
 class RecursoSonidoDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     model = RecursoSonido
@@ -168,6 +259,10 @@ class RecursoSonidoDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     login_url = '/login/'
     template_name = 'repository/recurso_confirm_delete.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        if self.object.propietario != self.request.user:
+            raise Http404('No tiene permiso para eliminar este elemento.')
+        return super(RecursoSonidoDeleteView, self).dispatch(request, *args, **kwargs)
 
 class RecursoLinkCreateView(LoginRequiredMixin, generic.edit.CreateView):
     model = RecursoEnlazado
@@ -188,9 +283,19 @@ class RecursoLinkUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
     login_url = '/login/'
     template_name = 'repository/recurso_form.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        if self.object.propietario != self.request.user:
+            raise Http404('No tiene permiso para editar este elemento.')
+        return super(RecursoLinkUpdateView, self).dispatch(request, *args, **kwargs)
 
 class RecursoLinkDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     model = RecursoEnlazado
     success_url = '/'
     login_url = '/login/'
     template_name = 'repository/recurso_confirm_delete.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.object.propietario != self.request.user:
+            raise Http404('No tiene permiso para eliminar este elemento.')
+        return super(RecursoLinkDeleteView, self).dispatch(request, *args, **kwargs)
+    
