@@ -11,9 +11,9 @@
 
 {% block content %}
 <h1>Recursos</h1>
-<a href="{% url 'repository:new-img-resource' %}">Subir una imagen</a>
-<a href="{% url 'repository:new-audio-resource' %}">Subir un audio</a>
-<a href="{% url 'repository:new-link-resource' %}">Guardar un enlace</a>
+<a href="{% url 'repository:new-img-resource' %}" class="link-new">Subir una imagen</a>
+<a href="{% url 'repository:new-audio-resource' %}" class="link-new">Subir un audio</a>
+<a href="{% url 'repository:new-link-resource' %}" class="link-new">Guardar un enlace</a>
 {% if recurso_lists %}
 <ul class="list">
     {% for recurso in recurso_lists %}
@@ -24,19 +24,19 @@
         
         {% if recurso.get_real_type == 'RecursoImagen' %}
             <img class="thumbnail" src="{{ recurso.recursoimagen.archivo.url }}" alt="miniatura">
-            <a href="{% url 'repository:detail-recurso-img' pk=recurso.pk %}" class="edit">Ver</a>
-            <a href="#"> Descargar</a>
+            <a href="{% url 'repository:detail-recurso-img' pk=recurso.pk %}" class="link-resource">Ver</a>
+            <a href="#" class="link-resource"> Descargar</a>
         {% elif recurso.get_real_type == 'RecursoSonido' %}
              <audio controls>
                  <source src="{{ recurso.recursosonido.archivo.url }}" type="audio/ogg">
                  Your browser does not support the audio element.
              </audio>
-            <a href="{% url 'repository:detail-recurso-audio' pk=recurso.pk %}" class="edit">Ver</a>
-            <a href="#"> Descargar</a>
+            <a href="{% url 'repository:detail-recurso-audio' pk=recurso.pk %}" class="link-resource">Ver</a>
+            <a href="#" class="link-resource"> Descargar</a>
         {% elif recurso.get_real_type == 'RecursoEnlazado' %}
             <a href="{{ recurso.recursoenlazado.url }}">{{ recurso.recursoenlazado.url  }}</a>
-            <a href="{% url 'repository:detail-recurso-link' pk=recurso.pk %}" class="edit">Ver</a>
-            <a href="#"> Descargar</a>
+            <a href="{% url 'repository:detail-recurso-link' pk=recurso.pk %}" class="link-resource">Ver</a>
+            <a href="#" class="link-resource"> Descargar</a>
         {% endif %}
     </li>
     {% endfor %}

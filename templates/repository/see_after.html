@@ -4,6 +4,7 @@
 {% block css_link%}
 <link rel="stylesheet" href="{% static 'repository/css/normalize.css' %}">
 <link rel="stylesheet" href="{% static 'repository/css/base.css' %}">
+<link rel="stylesheet" href="{% static 'repository/css/favorites.css' %}">
 {% endblock css_link %}
 
 {% block title %}App | Ver mas tarde{% endblock %}
@@ -11,30 +12,29 @@
 <h1>Ver m&aacute;s tarde</h1>
 
 {% if recurso_lists %}
-<ul>
+<ul class="list">
     {% for recurso in recurso_lists %}
-    <li>
+    <li class="list__item">
         {{ recurso.nombre }} --
         {{ recurso.descripcion }} --
         {{ recurso.categoria }} --
         
         {% if recurso.get_real_type == 'RecursoImagen' %}
             <img class="thumbnail" src="{{ recurso.recursoimagen.archivo.url }}" alt="miniatura">
-            <a href="{% url 'repository:detail-recurso-img' pk=recurso.pk %}" class="edit">Ver</a>
-            <a href="#"> Descargar</a>
+            <a href="{% url 'repository:detail-recurso-img' pk=recurso.pk %}" class="link-resource">Ver</a>
+            <a href="#" class="link-resource"> Descargar</a>
         {% elif recurso.get_real_type == 'RecursoSonido' %}
              <audio controls>
                  <source src="{{ recurso.recursosonido.archivo.url }}" type="audio/ogg">
                  Your browser does not support the audio element.
              </audio>
-            <a href="{% url 'repository:detail-recurso-audio' pk=recurso.pk %}" class="edit">Ver</a>
-            <a href="#"> Descargar</a>
+            <a href="{% url 'repository:detail-recurso-audio' pk=recurso.pk %}" class="link-resource">Ver</a>
+            <a href="#" class="link-resource"> Descargar</a>
         {% elif recurso.get_real_type == 'RecursoEnlazado' %}
             <a href="{{ recurso.recursoenlazado.url }}">{{ recurso.recursoenlazado.url  }}</a>
-            <a href="{% url 'repository:detail-recurso-link' pk=recurso.pk %}" class="edit">Ver</a>
-            <a href="#"> Descargar</a>
+            <a href="{% url 'repository:detail-recurso-link' pk=recurso.pk %}" class="link-resource">Ver</a>
+            <a href="#" class="link-resource"> Descargar</a>
         {% endif %}
-        <a href="#" >Eliminar de la lista</a>
     </li>
     {% endfor %}
 </ul>

@@ -21,6 +21,7 @@ body {
     padding: 1em;
     background-color: #292c2f;
     color: white;
+    text-align: center;
 }
 
 /*
@@ -49,10 +50,6 @@ body {
     color: black;
 }
 
-.item__link:hover {
-    color: #2196f3;
-}
-
 .item__link:active {
     color: black;
 }
@@ -64,10 +61,6 @@ body {
 .summary {
     list-style: none;
     padding: 15px 20px;
-}
-
-.summary:hover {
-    color: #2196f3;
 }
 
 .menu__item:nth-child(2) {
@@ -105,5 +98,11 @@ details[open] summary::before {
 }
 
 @media only screen and (min-width: 992px) {
-
+    .item__link:hover {
+        color: #2196f3;
+    }
+    
+    .summary:hover {
+        color: #2196f3;
+    }
 } 
