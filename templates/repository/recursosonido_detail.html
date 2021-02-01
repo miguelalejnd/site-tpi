@@ -24,9 +24,9 @@
     <form class="form" id="f2">{% csrf_token %}
         <input type="hidden" id="urlId-vms" value="http://127.0.0.1:8000/xhr/{{ object.pk }}/async_vms/">
         {% if is_vms %}
-        <input type="submit" class="submit" id="submit-vms-id" value="Agregar a Ver más tarde">
-        {% else %}
         <input type="submit" class="submit" id="submit-vms-id" value="Eliminar de Ver más tarde">
+        {% else %}
+        <input type="submit" class="submit" id="submit-vms-id" value="Agregar a Ver más tarde">
         {% endif %}
     </form>
     
@@ -48,6 +48,6 @@
                 Your browser does not support the audio element.
         </audio>
     </p>
-    <a href="#"> Descargar</a>
+    <a href="{{ object.archivo.url }}" download> Descargar</a>
     <script src="{% static 'repository/js/script.js' %}"></script>
 {% endblock %}

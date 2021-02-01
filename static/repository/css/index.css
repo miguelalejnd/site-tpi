@@ -13,7 +13,6 @@
     flex-direction: column;
     list-style: none;
     padding: .5em 0;
-    margin:0;
 }
 
 .list__item {
@@ -21,7 +20,7 @@
     background-color: white;
     border-radius: 10px;
     flex: 0 0 9em;
-    padding: 1em .3em 0;
+    padding: 0 .4em;
 }
 
 .link-resource {

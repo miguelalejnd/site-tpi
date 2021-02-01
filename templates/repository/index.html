@@ -18,9 +18,9 @@
 <ul class="list">
     {% for recurso in recurso_lists %}
     <li class="list__item">
-        {{ recurso.nombre }} --
-        {{ recurso.descripcion }} --
-        {{ recurso.categoria }} --
+        <h2>{{ recurso.nombre }}</h2>
+        <p>{{ recurso.descripcion }}</p>
+        <p>{{ recurso.categoria }}</p>
         
         {% if recurso.get_real_type == 'RecursoImagen' %}
             <img class="thumbnail" src="{{ recurso.recursoimagen.archivo.url }}" alt="miniatura">

@@ -6,7 +6,7 @@ from .models import RecursoImagen, RecursoSonido, RecursoEnlazado
 
 class UserRegistrationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
-        super(UserRegistrationForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         
         # Agrega un atributo class con el mismo valor
         # a todos los campos del formulario.
@@ -44,7 +44,7 @@ class UserRegistrationForm(UserCreationForm):
 
 class CustomAuthenticationForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
-        super(CustomAuthenticationForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         
         # Agrega un atributo class con el mismo valor
         # a todos los campos del formulario.
@@ -57,7 +57,7 @@ class CustomAuthenticationForm(AuthenticationForm):
 
 class RecursoImagenCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(RecursoImagenCreateForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         
         # Agrega un atributo class con el mismo valor
         # a todos los campos del formulario.
@@ -73,7 +73,7 @@ class RecursoImagenCreateForm(forms.ModelForm):
 
 class RecursoSonidoCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(RecursoSonidoCreateForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         
         # Agrega un atributo class con el mismo valor
         # a todos los campos del formulario.
@@ -90,7 +90,7 @@ class RecursoSonidoCreateForm(forms.ModelForm):
 
 class RecursoLinkCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(RecursoLinkCreateForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         
         # Agrega un atributo class con el mismo valor
         # a todos los campos del formulario.
