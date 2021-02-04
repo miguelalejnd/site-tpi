@@ -9,17 +9,17 @@
 }
 
 .list {
-    display: flex;
-    flex-direction: column;
     list-style: none;
-    padding: .5em 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,
+    minmax(320px, 1fr));
+    grid-gap: 1rem;
+    padding: .5em .3em;
 }
 
 .list__item {
-    margin: .5em;
     background-color: white;
     border-radius: 10px;
-    flex: 0 0 9em;
     padding: 0 .4em;
 }
 
@@ -37,11 +37,6 @@
 }
 
 @media only screen and (min-width: 600px) {
-    .list__item {
-        min-width: 400px;
-        flex: 0 0 9em;
-    }
-    
     .link-new {
         display: inline;
         padding: .5em 1em;
@@ -52,11 +47,5 @@
 @media only screen and (min-width: 992px) {
     .link-new:hover {
         color: #2196f3;
-    }
-    
-    .list {
-        flex-flow: row wrap;
-        justify-content: start;
-        
     }
 }
