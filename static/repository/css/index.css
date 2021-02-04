@@ -23,17 +23,26 @@
     padding: 0 .4em;
 }
 
-.link-resource {
-    text-decoration: none;
-    color: #003375;
-    display: block;
-    text-align: center;
-    padding: .5em 0;
-    background-color: white;
+.list__element {
+    min-height: 100px;
 }
 
-.thumbnail {
-    width: 100px
+.list__link-container {
+    text-align: center;
+    padding: .3em 0;
+}
+
+.list__link-resource {
+    text-decoration: none;
+    color: #003375;
+    background-color: white;
+    padding: 0 .3em;
+}
+
+
+.list__thumbnail {
+    width: 100px;
+    height: 100px;
 }
 
 @media only screen and (min-width: 600px) {

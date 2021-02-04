@@ -17,28 +17,40 @@
 <ul class="list">
     {% for recurso in recurso_lists %}
     <li class="list__item">
-        {{ recurso.nombre }} --
-        {{ recurso.descripcion }} --
-        {{ recurso.categoria }} --
+        <h2 class="item__title">{{ recurso.nombre }}</h2>
+        <p class="item__description">{{ recurso.descripcion }}</p>
+        <p class="item__category">{{ recurso.categoria }}</p>
         
         {% if recurso.get_real_type == 'RecursoImagen' %}
-            <img class="thumbnail" src="{{ recurso.recursoimagen.archivo.url }}" alt="miniatura">
-            <a href="{% url 'repository:edit-img-resource' pk=recurso.pk %}" class="link-resource">Editar</a>
-            <a href="{% url 'repository:delete-img-resource'  pk=recurso.pk %}" class="link-resource">Eliminar</a>
-            <a href="#" class="link-resource"> Descargar</a>
+            <div class="list__element">
+                <img class="list__thumbnail" src="{{ recurso.recursoimagen.archivo.url }}" alt="miniatura">
+            </div>
+            <div class="list__link-container">
+                <a href="{% url 'repository:edit-img-resource' pk=recurso.pk %}" class="list__link-resource">Editar</a>
+                <a href="{% url 'repository:delete-img-resource'  pk=recurso.pk %}" class="list__link-resource">Eliminar</a>
+                <a href="#" class="list__link-resource"> Descargar</a>
+            </div>
         {% elif recurso.get_real_type == 'RecursoSonido' %}
-             <audio controls>
-                 <source src="{{ recurso.recursosonido.archivo.url }}" type="audio/ogg">
-                 Your browser does not support the audio element.
-             </audio>
-            <a href="{% url 'repository:edit-audio-resource' pk=recurso.pk %}" class="link-resource">Editar</a>
-            <a href="{% url 'repository:delete-audio-resource'  pk=recurso.pk %}" class="link-resource">Eliminar</a>
-            <a href="#" class="link-resource"> Descargar</a>
+             <div class="list__element">
+                 <audio controls>
+                     <source src="{{ recurso.recursosonido.archivo.url }}" type="audio/ogg">
+                     Your browser does not support the audio element.
+                 </audio>
+             </div>
+             <div class="list__link-container">
+                <a href="{% url 'repository:edit-audio-resource' pk=recurso.pk %}" class="list__link-resource">Editar</a>
+                <a href="{% url 'repository:delete-audio-resource'  pk=recurso.pk %}" class="list__link-resource">Eliminar</a>
+                <a href="#" class="list__link-resource"> Descargar</a>
+            </div>
         {% elif recurso.get_real_type == 'RecursoEnlazado' %}
-            <a href="{{ recurso.recursoenlazado.url }}">{{ recurso.recursoenlazado.url  }}</a>
-            <a href="{% url 'repository:edit-link-resource' pk=recurso.pk %}" class="link-resource">Editar</a>
-            <a href="{% url 'repository:delete-link-resource'  pk=recurso.pk %}" class="link-resource">Eliminar</a>
-            <a href="#" class="link-resource"> Descargar</a>
+            <div class="list__element">
+                <a href="{{ recurso.recursoenlazado.url }}">{{ recurso.recursoenlazado.url  }}</a>
+            </div>
+            <div class="list__link-container">
+                <a href="{% url 'repository:edit-link-resource' pk=recurso.pk %}" class="list__link-resource">Editar</a>
+                <a href="{% url 'repository:delete-link-resource'  pk=recurso.pk %}" class="list__link-resource">Eliminar</a>
+                <a href="#" class="list__link-resource"> Descargar</a>
+            </div>
         {% endif %}
     </li>
     {% endfor %}
