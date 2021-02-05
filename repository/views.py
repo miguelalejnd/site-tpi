@@ -204,7 +204,7 @@ class RecursoImagenCreateView(LoginRequiredMixin, generic.edit.CreateView):
         
         return super().form_valid(form)
 
-class RecursoImagenUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
+class RecursoImagenUpdateView(generic.edit.UpdateView, LoginRequiredMixin):
     model = RecursoImagen
     form_class = RecursoImagenCreateForm
     success_url = '/'
@@ -212,9 +212,11 @@ class RecursoImagenUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
     template_name = 'repository/recurso_form.html'
     
     def dispatch(self, request, *args, **kwargs):
-        if self.object.propietario != self.request:
+        object = self.get_object()
+        if object.propietario != self.request.user:
             raise Http404('No tiene permiso para editar este elemento.')
-        return super(RecursoImagenUpdateView, self).dispatch(request, *args, **kwargs)
+            
+        return super().dispatch(request, *args, **kwargs)
 
 
 class RecursoImagenDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
@@ -224,9 +226,10 @@ class RecursoImagenDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     template_name = 'repository/recurso_confirm_delete.html'
     
     def dispatch(self, request, *args, **kwargs):
-        if self.object.propietario != self.request.user:
+        object = self.get_object()
+        if object.propietario != self.request.user:
             raise Http404('No tiene permiso para eliminar este elemento.')
-        return super(RecursoImagenDeleteView, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
 class RecursoSonidoCreateView(LoginRequiredMixin, generic.edit.CreateView):
     model = RecursoSonido
@@ -249,9 +252,11 @@ class RecursoSonidoUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
     template_name = 'repository/recurso_form.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if self.object.propietario != self.request.user:
+        object = self.get_object()
+        if object.propietario != self.request.user:
             raise Http404('No tiene permiso para editar este elemento.')
-        return super(RecursoSonidoUpdateView, self).dispatch(request, *args, **kwargs)
+            
+        return super().dispatch(request, *args, **kwargs)
 
 class RecursoSonidoDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     model = RecursoSonido
@@ -260,9 +265,11 @@ class RecursoSonidoDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     template_name = 'repository/recurso_confirm_delete.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if self.object.propietario != self.request.user:
+        object = self.get_object()
+        if object.propietario != self.request.user:
             raise Http404('No tiene permiso para eliminar este elemento.')
-        return super(RecursoSonidoDeleteView, self).dispatch(request, *args, **kwargs)
+            
+        return super().dispatch(request, *args, **kwargs)
 
 class RecursoLinkCreateView(LoginRequiredMixin, generic.edit.CreateView):
     model = RecursoEnlazado
@@ -284,9 +291,11 @@ class RecursoLinkUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
     template_name = 'repository/recurso_form.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if self.object.propietario != self.request.user:
+        object = self.get_object()
+        if object.propietario != self.request.user:
             raise Http404('No tiene permiso para editar este elemento.')
-        return super(RecursoLinkUpdateView, self).dispatch(request, *args, **kwargs)
+
+        return super().dispatch(request, *args, **kwargs)
 
 class RecursoLinkDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     model = RecursoEnlazado
@@ -295,7 +304,9 @@ class RecursoLinkDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     template_name = 'repository/recurso_confirm_delete.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if self.object.propietario != self.request.user:
+        object = self.get_object()
+        if object.propietario != self.request.user:
             raise Http404('No tiene permiso para eliminar este elemento.')
-        return super(RecursoLinkDeleteView, self).dispatch(request, *args, **kwargs)
+            
+        return super().dispatch(request, *args, **kwargs)
     
