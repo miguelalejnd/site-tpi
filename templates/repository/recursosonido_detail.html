@@ -9,8 +9,8 @@
 
 {% block title %}App | Nuevo audio{% endblock %}
 {% block content %}
+    <a href="{% url 'repository:index' %}" class="back-link">Regresar</a>
     <h1 class="h1">{{ object.nombre | title }}</h1>
-    <a href="{% url 'repository:index' %}" class="back">Regresar</a>
     
     <form class="form" id="f1">{% csrf_token %}
         <input type="hidden" id="urlId" value="http://127.0.0.1:8000/xhr/{{ object.pk }}/async-fav/">
