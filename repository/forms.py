@@ -62,7 +62,7 @@ class RecursoImagenCreateForm(forms.ModelForm):
         # Agrega un atributo class con el mismo valor
         # a todos los campos del formulario.
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['class'] = 'form__control'
         
         self.fields['nombre'].widget.attrs['placeholder'] = 'Nombre'
         self.fields['descripcion'].widget.attrs['placeholder'] = 'Descripción'
@@ -78,7 +78,7 @@ class RecursoSonidoCreateForm(forms.ModelForm):
         # Agrega un atributo class con el mismo valor
         # a todos los campos del formulario.
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['class'] = 'form__control'
         
         self.fields['nombre'].widget.attrs['placeholder'] = 'Nombre'
         self.fields['descripcion'].widget.attrs['placeholder'] = 'Descripción'
@@ -95,7 +95,7 @@ class RecursoLinkCreateForm(forms.ModelForm):
         # Agrega un atributo class con el mismo valor
         # a todos los campos del formulario.
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['class'] = 'form__control'
         
         self.fields['nombre'].widget.attrs['placeholder'] = 'Nombre'
         self.fields['descripcion'].widget.attrs['placeholder'] = 'Descripción'

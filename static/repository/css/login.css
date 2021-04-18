@@ -63,6 +63,7 @@ body {
   font-family: Roboto, sans-serif;
   font-size: 1.2em;
 }
+
 .form__submit:focus {
     outline: 0;
 }

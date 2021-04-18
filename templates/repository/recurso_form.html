@@ -4,7 +4,7 @@
 {% block css_link%}
 <link rel="stylesheet" href="{% static 'repository/css/normalize.css' %}">
 <link rel="stylesheet" href="{% static 'repository/css/base.css' %}">
-<!--<link rel="stylesheet" href="{% static 'repository/css/index.css' %}">-->
+<link rel="stylesheet" href="{% static 'repository/css/new-resource.css' %}">
 {% endblock css_link %}
 
 {% block title %}App | Nueva imagen{% endblock %}
@@ -19,9 +19,9 @@
         {% for field in form %}
         {{ field }}
         {% endfor %}
-        <input type="submit" value="Guardar" class="form__sumbit">
+        <input type="submit" value="Guardar" class="form__submit form__control">
     </form>
     {% if object %}
-     <a href="{% url 'repository:delete-img-resource'  pk=object.pk %}" class="delete">Eliminar</a>
+     <a href="{% url 'repository:delete-img-resource'  pk=object.pk %}" class="delete-link">Eliminar</a>
     {% endif %}
 {% endblock %}
