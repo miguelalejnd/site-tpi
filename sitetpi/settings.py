@@ -25,7 +25,8 @@ SECRET_KEY = '7z4a$ikbd0j&-ri3o1nj0*qm0-jw&y6m*c%$qcsdae7jy$@@4$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1',
+                 'https://nameless-garden-64008.herokuapp.com/']
 
 
 # Application definition
@@ -79,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sitetpi',
         'USER': 'postgres',
-        'PASSWORD': 'abc123',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -135,3 +136,7 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = 'login'
+
+# Configure Django App for Heroku.
+import django_on_heroku
+django_on_heroku.settings(locals())
